@@ -1,6 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Demo_LazyCache_ConsoleApp;
-using LazyCache;
 
 #region Without Caching
 Console.WriteLine("############## WITHOUT CACHING##########");

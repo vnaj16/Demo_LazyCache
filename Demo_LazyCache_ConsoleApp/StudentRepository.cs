@@ -31,10 +31,25 @@ namespace Demo_LazyCache_ConsoleApp
             // and cache the results for next time under the given key
             return cache.GetOrAdd("Students", complexObjectFactory);
         }
+
+        //Este es un ejemplo mas elaborado sacado de aqui: https://medium.com/swlh/how-to-use-lazycache-in-your-net-core-application-beginners-guide-c41372b41591
+        //En ese post est'a un uso un poco mas pro de esta libreria
+        public Product checkCache(string productId)
+        {
+            Func<Product> loadedProduct = () => LoadProduct(productId);
+            Product cachedResult = cache.GetOrAdd(productId, loadedProduct, DateTimeOffset.UtcNow.AddMinutes(15));
+            return cachedResult;
+        }
+
         public List<Student> GetAllWithoutCaching()
         {
             Thread.Sleep(5000);
             return listToReturn;
         }
     }
+    public class Product
+    {
+
+    }
 }
+
